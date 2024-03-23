@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CryptoMonitoringBybit;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 class Program
@@ -15,7 +16,8 @@ class Program
 
 	private static void ConfigureService(HostBuilderContext host, IServiceCollection services)
 	{
-		
+		services.AddHttpClient<CryptoMonitoringBybitClient>(client 
+			=> client.BaseAddress = new Uri(host.Configuration["Bybit"]));
 	}
 
 	 static async Task Main(string[] args)
@@ -23,6 +25,12 @@ class Program
 		using var host = Hosting;
 
 		await host.StartAsync();
+
+		var bybitClient = Services.GetService<CryptoMonitoringBybitClient>();
+
+		var orderBook = await bybitClient.GetOrderbook();
+
+		Console.WriteLine("\n------\n");
 
 		Console.WriteLine("Done!");
 		Console.ReadKey();
