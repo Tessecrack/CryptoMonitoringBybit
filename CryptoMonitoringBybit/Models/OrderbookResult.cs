@@ -7,11 +7,11 @@ namespace CryptoMonitoringBybit.Models
     {
         [JsonPropertyName("b")]
         [JsonConverter(typeof(JsonPriceSizeConverter))]
-        public List<PriceInfo> BidBuyer { get; set; }
+        public List<PriceInfo> BidBuyers { get; set; }
 
         [JsonPropertyName("a")]
         [JsonConverter(typeof(JsonPriceSizeConverter))]
-        public List<PriceInfo> AskBuyer { get; set; }
+        public List<PriceInfo> AskBuyers { get; set; }
 
         [JsonPropertyName("s")]
         public string SymbolName { get; set; }
@@ -24,6 +24,20 @@ namespace CryptoMonitoringBybit.Models
 
         [JsonPropertyName("seq")]
         public long CrossSequence { get; set; }
-    }
+
+		public override string ToString()
+		{
+            var resultStr = $"symbol: {SymbolName};";
+            if (AskBuyers is not null && AskBuyers.Count > 0)
+            {
+                resultStr += $" ask: {string.Join(';', AskBuyers)}";
+            }
+            if (BidBuyers is not null && BidBuyers.Count > 0)
+            {
+                resultStr += $" bid: {string.Join(';', BidBuyers)}";
+            }
+            return resultStr;
+		}
+	}
 }
 

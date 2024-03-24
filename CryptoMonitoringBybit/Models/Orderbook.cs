@@ -16,6 +16,16 @@ namespace CryptoMonitoringBybit.Models
 
         [JsonPropertyName("retExtInfo")]
         public object RetExtInfo { get; set; }
-    }
+
+		public override string ToString()
+		{
+            var resultStr = $"code: {RetCode}; msg: {RetMsg};";
+            if (Result is not null) 
+            {
+                resultStr += $" result: {Result}";
+            }
+			return resultStr;
+		}
+	}
 }
 

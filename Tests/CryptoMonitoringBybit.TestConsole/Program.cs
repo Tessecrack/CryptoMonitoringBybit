@@ -1,6 +1,7 @@
 ﻿using CryptoMonitoringBybit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CryptoMonitoringBybit.Models;
 
 class Program
 {
@@ -29,6 +30,10 @@ class Program
 		var bybitClient = Services.GetService<CryptoMonitoringBybitClient>();
 
 		var orderBook = await bybitClient.GetOrderbook();
+
+		var ticker = await bybitClient.GetTickerBySymbol(ProductType.SPOT, "TONUSDT");
+
+		var tickers = await bybitClient.GetTickers(ProductType.SPOT);
 
 		Console.WriteLine("\n------\n");
 
