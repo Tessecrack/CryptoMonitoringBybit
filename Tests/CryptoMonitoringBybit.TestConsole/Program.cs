@@ -35,6 +35,8 @@ class Program
 
 		var tickers = await bybitClient.GetTickers(ProductType.SPOT);
 
+		var symbolInfo = await bybitClient.GetSymbolInfo(ProductType.SPOT, "TONUSDT");
+
 		Console.WriteLine("\n------\n");
 
 		Console.WriteLine("Done!");

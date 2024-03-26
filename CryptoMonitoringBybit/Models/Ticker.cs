@@ -84,12 +84,4 @@ namespace CryptoMonitoringBybit.Models
 			return $"symbol: {Symbol}; last: {LastPrice} ; high: {HighPrice}; low: {LowPrice}";
 		}
 	}
-
-	public enum ProductType : byte
-	{
-		SPOT,
-		LINEAR,
-		INVERSE, 
-		OPTION
-	}
 }

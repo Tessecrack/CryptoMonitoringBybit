@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Threading;
 using CryptoMonitoringBybit.Models;
 
 namespace CryptoMonitoringBybit
@@ -39,6 +40,19 @@ namespace CryptoMonitoringBybit
 			var result = await _client.GetFromJsonAsync<Ticker>($"/v5/market/tickers?category={categoryStr}&symbol={symbolName}",
 				cancellationToken)
 				.ConfigureAwait(false);
+
+			return result;
+		}
+
+		public async Task<SymbolInfo> GetSymbolInfo(ProductType productType, 
+			string symbolName = "BTCUSDT",
+			CancellationToken cancellationToken = default)
+		{
+			var categoryStr = productType.ToString().ToLower();
+
+			var result = await _client.GetFromJsonAsync<SymbolInfo>($"/v5/market/instruments-info?category={categoryStr}&symbol={symbolName}",
+					cancellationToken)
+					.ConfigureAwait(false);
 
 			return result;
 		}
