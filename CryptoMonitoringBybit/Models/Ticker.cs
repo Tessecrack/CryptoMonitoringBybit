@@ -3,20 +3,14 @@
 namespace CryptoMonitoringBybit.Models
 {
 	[Serializable]
-	public class Ticker
+	public class Ticker : BaseResponse
 	{
-		[JsonPropertyName("retCode")]
-		public int RetCode { get; set; }
-
-		[JsonPropertyName("retMsg")]
-		public string RetMsg { get; set; }
-
 		[JsonPropertyName("result")]
 		public TickerInfo Result { get; set; }
 
 		public override string ToString()
 		{
-			var resultStr = $"retCode: {RetCode}; retMsg: {RetMsg};";
+			var resultStr = base.ToString();
 			if (Result is not null)
 			{
 				resultStr += $" {Result};";

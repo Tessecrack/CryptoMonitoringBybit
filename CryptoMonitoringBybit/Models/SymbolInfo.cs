@@ -2,19 +2,10 @@
 
 namespace CryptoMonitoringBybit.Models
 {
-	public class SymbolInfo
+	public class SymbolInfo : BaseResponse
 	{
-		[JsonPropertyName("retCode")]
-		public int RetCode { get; set; }
-
-		[JsonPropertyName("retMsg")]
-		public string RetMsg { get; set; }
-
 		[JsonPropertyName("result")]
 		public SymbolsInfo SymbolsInfo { get; set; }
-
-		[JsonPropertyName("retExtInfo")]
-		public Retextinfo RetextInfo { get; set; }
 
 		[JsonPropertyName("time")]
 		public long Time { get; set; }
@@ -123,9 +114,4 @@ namespace CryptoMonitoringBybit.Models
 		[JsonPropertyName("postOnlyMaxOrderQty")]
 		public string PostOnlyMaxOrderQty { get; set; }
 	}
-
-	public class Retextinfo
-	{
-	}
-
 }
