@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CryptoMonitoringBybit.Models;
+using Polly;
+using Polly.Extensions.Http;
 
 class Program
 {
@@ -17,11 +19,23 @@ class Program
 
 	private static void ConfigureService(HostBuilderContext host, IServiceCollection services)
 	{
-		services.AddHttpClient<CryptoMonitoringBybitClient>(client 
-			=> client.BaseAddress = new Uri(host.Configuration["Bybit"]));
+		services.AddHttpClient<CryptoMonitoringBybitClient>(client
+			=> client.BaseAddress = new Uri(host.Configuration["Bybit"]))
+			.SetHandlerLifetime(TimeSpan.FromMinutes(5))
+			.AddPolicyHandler(GetRetryPolicy());
 	}
 
-	 static async Task Main(string[] args)
+	private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+	{
+		var jitter = new Random();
+
+		return HttpPolicyExtensions
+			.HandleTransientHttpError()
+			.WaitAndRetryAsync(6, retry_attempt => TimeSpan.FromSeconds(Math.Pow(2, retry_attempt)) 
+			+ TimeSpan.FromMilliseconds(jitter.Next(0, 1000)));
+	}
+
+	static async Task Main(string[] args)
 	{
 		using var host = Hosting;
 
