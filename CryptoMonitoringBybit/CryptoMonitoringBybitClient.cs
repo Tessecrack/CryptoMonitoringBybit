@@ -10,7 +10,9 @@ namespace CryptoMonitoringBybit
 
 		public CryptoMonitoringBybitClient(HttpClient client) => _client = client;
 
-		public async Task<Orderbook> GetOrderbook(string symbol = "BTCUSDT", CancellationToken cancellationToken = default)
+		public async Task<Orderbook> GetOrderbook(string symbol = "BTCUSDT",
+			IProgress<double> progress = null,
+			CancellationToken cancellationToken = default)
 		{
 			var result = await _client.GetFromJsonAsync<Orderbook>($"/v5/market/orderbook?category=spot&symbol={symbol}",
 				cancellationToken)
@@ -19,7 +21,8 @@ namespace CryptoMonitoringBybit
 			return result;
 		}
 
-		public async Task<Ticker> GetTickers(ProductType productType, 
+		public async Task<Ticker> GetTickers(ProductType productType,
+			IProgress<double> progress = null,
 			CancellationToken cancellationToken = default)
 		{
 			var categoryStr = productType.ToString().ToLower();
@@ -32,7 +35,8 @@ namespace CryptoMonitoringBybit
 		}
 
 		public async Task<Ticker> GetTickerBySymbol(ProductType productType, 
-			string symbolName = "BTCUSDT", 
+			string symbolName = "BTCUSDT",
+			IProgress<double> progress = null,
 			CancellationToken cancellationToken = default)
 		{
 			var categoryStr = productType.ToString().ToLower();
@@ -46,6 +50,7 @@ namespace CryptoMonitoringBybit
 
 		public async Task<SymbolInfo> GetSymbolInfo(ProductType productType, 
 			string symbolName = "BTCUSDT",
+			IProgress<double> progress = null,
 			CancellationToken cancellationToken = default)
 		{
 			var categoryStr = productType.ToString().ToLower();
