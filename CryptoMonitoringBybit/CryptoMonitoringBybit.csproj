@@ -18,13 +18,23 @@
 		<IncludeSymbols>False</IncludeSymbols>
 		<SignAssembly>True</SignAssembly>
 		<DelaySign>False</DelaySign>
-		<AssemblyOriginatorKeyFile>CryptoMonitoringBybit.snk</AssemblyOriginatorKeyFile>
 		<Authors>mege.sirozu@gmail.com</Authors>
 		<Company>mege.sirozu@gmail.com</Company>
 		<Description>Non verified client for Bybit api</Description>
 		<PackageProjectUrl>https://github.com/Tessecrack/CryptoMonitoringBybit</PackageProjectUrl>
 		<PackageTags>Crypto;Bybit;WebAPI</PackageTags>
 		<RepositoryType>git</RepositoryType>
+		<Product>CryptoMonitoringBybit</Product>
+		<PackageId>CryptoMonitoringBybit</PackageId>
+		<AssemblyOriginatorKeyFile>CryptoMonitoringBybit.snk</AssemblyOriginatorKeyFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <IsPublishable>False</IsPublishable>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<ItemGroup>
