@@ -37,6 +37,8 @@ class Program
 
 		var symbolInfo = await bybitClient.GetSymbolInfo(ProductType.SPOT, "TONUSDT");
 
+		var markPriceInfo = await bybitClient.GetMarketPriceInfo(ProductType.SPOT, "TONUSDT");
+
 		Console.WriteLine("\n------\n");
 
 		Console.WriteLine("Done!");
