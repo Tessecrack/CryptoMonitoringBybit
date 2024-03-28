@@ -17,65 +17,66 @@ namespace CryptoMonitoringBybit.Models
 			}
 			return resultStr;
 		}
-	}
 
-	[Serializable]
-	public class TickerInfo
-	{
-		[JsonPropertyName("category")]
-		[JsonConverter(typeof(JsonStringEnumConverter))]
-		public ProductType ProductType { get; set; }
 
-		[JsonPropertyName("list")]
-		public List<Info> TickersInfo { get; set; }
-
-		public override string ToString()
+		[Serializable]
+		public class TickerInfo
 		{
-			var resultStr = $"category: {ProductType};";
-			if (TickersInfo is not null && TickersInfo.Count > 0)
+			[JsonPropertyName("category")]
+			[JsonConverter(typeof(JsonStringEnumConverter))]
+			public ProductType ProductType { get; set; }
+
+			[JsonPropertyName("list")]
+			public List<Info> TickersInfo { get; set; }
+
+			public override string ToString()
 			{
-				resultStr += $" {string.Join(';', TickersInfo)}";
+				var resultStr = $"category: {ProductType};";
+				if (TickersInfo is not null && TickersInfo.Count > 0)
+				{
+					resultStr += $" {string.Join(';', TickersInfo)}";
+				}
+				return resultStr;
 			}
-			return resultStr;
-		}
-	}
 
-	[Serializable]
-	public class Info
-	{
-		[JsonPropertyName("symbol")]
-		public string Symbol { get; set; }
+			[Serializable]
+			public class Info
+			{
+				[JsonPropertyName("symbol")]
+				public string Symbol { get; set; }
 
-		[JsonPropertyName("lastPrice")]
-		public double LastPrice { get; set; }
+				[JsonPropertyName("lastPrice")]
+				public double LastPrice { get; set; }
 
-		[JsonPropertyName("indexPrice")]
-		public double IndexPrice { get; set; }
+				[JsonPropertyName("indexPrice")]
+				public double IndexPrice { get; set; }
 
-		[JsonPropertyName("markPrice")]
-		public double MarkPrice {  get; set; }
+				[JsonPropertyName("markPrice")]
+				public double MarkPrice { get; set; }
 
-		[JsonPropertyName("highPrice24h")]
-		public double HighPrice { get; set; }
+				[JsonPropertyName("highPrice24h")]
+				public double HighPrice { get; set; }
 
-		[JsonPropertyName("lowPrice24h")]
-		public double LowPrice { get; set; }
+				[JsonPropertyName("lowPrice24h")]
+				public double LowPrice { get; set; }
 
-		[JsonPropertyName("openInterest")]
-		public double OpenInterest { get; set; }
+				[JsonPropertyName("openInterest")]
+				public double OpenInterest { get; set; }
 
-		[JsonPropertyName("openInterestValue")]
-		public double OpenInterestValue { get; set; }
+				[JsonPropertyName("openInterestValue")]
+				public double OpenInterestValue { get; set; }
 
-		[JsonPropertyName("volume24h")]
-		public double Volume { get; set; }
+				[JsonPropertyName("volume24h")]
+				public double Volume { get; set; }
 
-		[JsonPropertyName("fundingRate")]
-		public double FundingRate { get; set; }
+				[JsonPropertyName("fundingRate")]
+				public double FundingRate { get; set; }
 
-		public override string ToString()
-		{
-			return $"symbol: {Symbol}; last: {LastPrice} ; high: {HighPrice}; low: {LowPrice}";
+				public override string ToString()
+				{
+					return $"symbol: {Symbol}; last: {LastPrice} ; high: {HighPrice}; low: {LowPrice}";
+				}
+			}
 		}
 	}
 }
